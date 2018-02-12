@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="instructors">
+        <item>Wołodymyr Kłyczko</item>
+        <item>Witalij Kłyczko</item>
+        <item>Petro Poroszenko</item>
+    </string-array>
+
+</resources>
