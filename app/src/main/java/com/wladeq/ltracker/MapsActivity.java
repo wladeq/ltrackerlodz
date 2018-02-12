@@ -269,7 +269,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Finish Record
     public void finishRec(View view) {
         FinishRaceDialog a = new FinishRaceDialog();
-        a.show(getSupportFragmentManager(), "Instructor choice");
+        a.show(getSupportFragmentManager(), "Finish race");
     }
 }
 
