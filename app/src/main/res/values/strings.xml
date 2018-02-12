@@ -16,5 +16,8 @@
 
     <string name="finish_race_1">Do you want to finish record?</string>>
 
-    <string name="choose_an_instructor">Choose an instructor (optional)</string>
+    <string name="choose_an_instructor">Choose an instructor</string>
+    <string name="abs_always_be_careful">ABS - Always Be Careful</string>
+    <string name="is_as_simple_as">is as simple as</string>
+    <string name="safety">Safety</string>
 </resources>
