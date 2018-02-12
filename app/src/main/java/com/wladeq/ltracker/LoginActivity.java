@@ -8,9 +8,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+
 // this class describes login screen
 // allows to proceed to "contuct us" screen or to "login" screen
-
 
 public class LoginActivity extends AppCompatActivity {
 

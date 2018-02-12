@@ -41,6 +41,8 @@ public class AfterLoginActivity extends AppCompatActivity {
         InstructorChoiceDialog a = new InstructorChoiceDialog();
         a.show(getSupportFragmentManager(), "Instructor choice");
     }
+
+    //This function turn off system "back" button
     @Override
     public void onBackPressed() {
         Toast toast = Toast.makeText(this, "Press 'Logout' to exit", Toast.LENGTH_LONG);

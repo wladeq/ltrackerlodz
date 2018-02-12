@@ -40,7 +40,7 @@ public class ContactUsActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(intent, "Choose an Email client :"));
     }
 
-    //logout and go back to login screen
+    //go back to login screen
     public void backToLogin(View view) {
         Intent intent = new Intent (this,LoginActivity.class);
         startActivity(intent);
