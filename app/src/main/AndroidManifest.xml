@@ -14,12 +14,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAcwZlvE4sUoeOfyteUCqMux6v3KdnWNF0" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,17 +29,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AfterLoginActivity"
+            android:name=".activities.AfterLoginActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps">
 
         </activity>
-        <activity android:name=".ContactUsActivity"
+        <activity android:name=".activities.ContactUsActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".InstructorChoose" />
 
 
     </application>

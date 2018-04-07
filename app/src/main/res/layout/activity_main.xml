@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/start_race_page"
-    tools:context="com.wladeq.ltracker.LoginActivity"
+    tools:context="com.wladeq.ltracker.activities.LoginActivity"
     tools:ignore="Overdraw">
 
     <Button
@@ -44,12 +44,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/bkant"
-        android:text="Welcome!"
+        android:text="@string/welcome"
         android:textColor="@color/white"
         android:textSize="55sp"
         app:layout_constraintBottom_toTopOf="@+id/btnSingIn"

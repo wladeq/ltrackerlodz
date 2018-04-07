@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/contact_us_page"
     android:orientation="vertical"
-    tools:context="com.wladeq.ltracker.ContactUsActivity"
+    tools:context="com.wladeq.ltracker.activities.ContactUsActivity"
 
     tools:layout_editor_absoluteY="25dp">
 
@@ -267,7 +267,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
-        android:text="Ltracker 2018 ©"
+        android:text="@string/ltracker_2018"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

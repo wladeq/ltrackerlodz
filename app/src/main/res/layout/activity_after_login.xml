@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:background="@drawable/warning"
-    tools:context="com.wladeq.ltracker.AfterLoginActivity">
+    tools:context="com.wladeq.ltracker.activities.AfterLoginActivity">
 
     <Button
         android:id="@+id/button5"
@@ -66,7 +66,6 @@
         app:layout_constraintVertical_bias="0.95" />
 
     <TextView
-        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
