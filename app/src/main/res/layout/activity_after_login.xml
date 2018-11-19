@@ -33,26 +33,40 @@
 
     <Button
         android:id="@+id/btnSingIn"
+        android:layout_width="300dp"
+        android:layout_height="47dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/login_grey"
         android:fontFamily="@font/bkant_bold"
         android:onClick="letsStart"
         android:text="@string/start_race"
         android:textColor="@color/tw__composer_black"
-        android:textSize="35sp"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_width="300dp" />
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/login_grey"
+        android:fontFamily="@font/bkant_bold"
+        android:textSize="23sp"
+        android:text="@string/list_of_rides"
+        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintHorizontal_bias="0.495"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button6"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/login_grey"
         android:fontFamily="@font/bkant_bold"
         android:onClick="instructorChoiceDialog"
@@ -60,10 +74,9 @@
         android:textColor="@color/tw__composer_black"
         android:textSize="23sp"
         app:layout_constraintBottom_toTopOf="@+id/btnSingIn"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -96,15 +109,20 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
         android:layout_marginEnd="1dp"
         android:fontFamily="@font/bkant_bold"
         android:text="@string/abs_always_be_careful"
         android:textColor="@android:color/white"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="1dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        tools:layout_editor_absoluteY="455dp" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.57"/>
 
 
 </android.support.constraint.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.widget.Toast
 
 import com.firebase.ui.auth.AuthUI
 import com.wladeq.ltracker.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 // this class describes login screen
 // allows to proceed to "contuct us" screen or to "login" screen
@@ -18,7 +19,7 @@ import com.wladeq.ltracker.R
 class LoginActivity : AppCompatActivity() {
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         //checking if we received permission to login
         if (requestCode == LOGIN_PERMISSION) {
@@ -53,13 +54,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        //finding button
-        val btnLogin = findViewById<Button>(R.id.btnSingIn)
-
-
         //describing what button should do
-        btnLogin.setOnClickListener {
+        btnSingIn.setOnClickListener {
             startActivityForResult(
 
                     //authentication is realised with the help of google services
