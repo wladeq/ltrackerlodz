@@ -47,7 +47,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
 
     //generate UID to name current track record
     private val trackUid = UUID.randomUUID().toString()
-
+    //Some test change
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
