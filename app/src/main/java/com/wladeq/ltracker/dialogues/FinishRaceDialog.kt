@@ -17,14 +17,12 @@ class FinishRaceDialog : DialogFragment() {
 
         val builder = AlertDialog.Builder(activity)
         builder.setMessage("Do you want to finish race?")
-                .setPositiveButton("Finish") { dialog, id ->
+                .setPositiveButton("Finish") { _, _ ->
                     //closing current class if user wants to stop recording
-
                     System.exit(0)
                 }
-
                 //closing popup if user presses "cancel"
-                .setNegativeButton(R.string.cancel) { dialog, id -> }
+                .setNegativeButton(R.string.cancel) { _, _ -> }
 
         // creating "AlertDialog" and returning it where it was called
         return builder.create()

@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.wladeq.ltracker.InstructorChoose
 import com.wladeq.ltracker.R
@@ -41,7 +42,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
     private var mMap: GoogleMap? = null
     private var mGoogleApiClient: GoogleApiClient? = null
     private var i = 1
-    private var startMarker: Int = 0
+    private var startMarker: Boolean = true
     private var lastLoc: LatLng? = null
 
     //generate UID to name current track record
@@ -52,10 +53,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
         setContentView(R.layout.activity_maps)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkLocationPermission()
-        }
-
+        checkLocationPermission()
         //Find where we should show the map
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -65,6 +63,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
         val studentUid = user?.uid
 
         //If current client is new - store his data in Firebase
+
         FirebaseDatabase.getInstance().getReference("users/$studentUid/email").setValue(user?.email)
         FirebaseDatabase.getInstance().getReference("users/$studentUid/role").setValue(0)
         FirebaseDatabase.getInstance().getReference("users/$studentUid/uid").setValue(studentUid)
@@ -79,17 +78,13 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         //type of the map
-        mMap!!.mapType = GoogleMap.MAP_TYPE_NORMAL
+        mMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
         //Location settings
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this,
-                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                buildGoogleApiClient()
-                mMap!!.isMyLocationEnabled = true
-            }
-        } else {
+        mMap?.isMyLocationEnabled = true
+        if (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             buildGoogleApiClient()
-            mMap!!.isMyLocationEnabled = true
+            mMap?.isMyLocationEnabled = true
         }
     }
 
@@ -108,7 +103,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
         val mLocationRequest = LocationRequest()
         mLocationRequest.interval = 1000
         mLocationRequest.fastestInterval = 1000
-        mLocationRequest.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
+        mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this)
@@ -125,13 +120,13 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
         val latLng = LatLng(location.latitude, location.longitude)
 
         //Place start marker
-        if (startMarker == 0) {
+        if (startMarker) {
             val markerOptions = MarkerOptions()
                     .position(latLng)
                     .title("Start position")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-            mMap!!.addMarker(markerOptions)
-            startMarker++
+            mMap?.addMarker(markerOptions)
+            startMarker = false
         }
 
         // if there's no previous location, we place start marker and setting current marker as previous
@@ -141,16 +136,16 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
                     .add(lastLoc)
                     .add(latLng)
                     .color(Color.GREEN)
-            mMap!!.addPolyline(pLineOptions)
+            mMap?.addPolyline(pLineOptions)
             latLng
         } else {
             latLng
         }
-        startMarker++
+        startMarker = false
 
         //move map camera
-        mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-        mMap!!.animateCamera(CameraUpdateFactory.zoomTo(15f))
+        mMap?.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+        mMap?.animateCamera(CameraUpdateFactory.zoomTo(15f))
 
         //Save dots to firebase
         val database = FirebaseDatabase.getInstance()
@@ -191,7 +186,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
                         if (mGoogleApiClient == null) {
                             buildGoogleApiClient()
                         }
-                        mMap!!.isMyLocationEnabled = true
+                        mMap?.isMyLocationEnabled = true
                     }
                 } else {
                     // Permission denied, Disable the functionality that depends on this permission.
@@ -207,7 +202,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
     }
 
     //Finish Record
-    fun finishRec(view: View) {
+    fun finishRec(v: View) {
         FinishRaceDialog().show(supportFragmentManager, "Finish race")
     }
 

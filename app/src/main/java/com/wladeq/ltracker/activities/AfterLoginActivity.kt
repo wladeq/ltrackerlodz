@@ -23,19 +23,23 @@ class AfterLoginActivity : AppCompatActivity() {
 
 
     // this function starts recording (by pressing a button)
-    fun letsStart(view: View) {
+    fun letsStart(v: View) {
         startActivity(Intent(this, MapsActivity::class.java))
+    }
+   fun listOfRidea(v: View) {
+        startActivity(Intent(this, ListOfRidesActivity::class.java))
     }
 
 
     //this function is logging out current user (by pressing a button)
-    fun logout(view: View) {
+    fun logout(v: View) {
         startActivity(Intent(this, LoginActivity::class.java))
     }
 
 
+
     //this function allows to choose the instructor with a button
-    fun instructorChoiceDialog(view: View) {
+    fun instructorChoiceDialog(v: View) {
         InstructorChoiceDialog().show(supportFragmentManager, "Instructor choice")
     }
 

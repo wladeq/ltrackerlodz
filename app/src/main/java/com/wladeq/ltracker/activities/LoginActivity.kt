@@ -61,6 +61,18 @@ class LoginActivity : AppCompatActivity() {
                     //authentication is realised with the help of google services
                     AuthUI.getInstance().createSignInIntentBuilder()
                             .setAllowNewEmailAccounts(false).build(), LOGIN_PERMISSION)
+
+//             AuthUI.getInstance()
+//                    .createSignInIntentBuilder()
+//                    .setLogo(R.mipmap.ic_launcher_round)
+//                    .setIsSmartLockEnabled(false)
+//                    .setProviders(
+//                            arrayListOf(AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+//                    .setTheme(R.style.AppTheme)
+//                    .setAllowNewEmailAccounts(false)
+//                    .setLogo(R.drawable.com_facebook_button_login_logo)
+//                    .build(),
+//                    LOGIN_PERMISSION)
         }
     }
 

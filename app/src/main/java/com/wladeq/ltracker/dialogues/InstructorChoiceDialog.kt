@@ -14,7 +14,7 @@ class InstructorChoiceDialog : DialogFragment() {
         // setting the name of pop-up
         builder.setTitle(R.string.dialog_choose_instructor)
         // identifying what was chosen
-        builder.setItems(R.array.instructors) { dialog, choice ->
+        builder.setItems(R.array.instructors) { _, choice ->
             // reading the choice and sending to other class
             when(choice){
                 0 -> InstructorChoose().setChoice("ucBNQA1WR3SM5fUgNdniVumm67r2")
