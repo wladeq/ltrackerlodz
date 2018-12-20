@@ -10,7 +10,7 @@ import com.wladeq.ltracker.R
 import com.wladeq.ltracker.dialogues.InstructorChoiceDialog
 
 
-class AfterLoginActivity : AppCompatActivity() {
+class DashboardActivity : AppCompatActivity() {
 
     // this class describes the screen which shows up after login
     // it allows to choose instructor, to start recording of drive session and to logout

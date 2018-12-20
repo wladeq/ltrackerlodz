@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 
 import com.firebase.ui.auth.AuthUI
@@ -28,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    //if client login is successful, show "AfterLoginActivity" screen
+    //if client login is successful, show "DashboardActivity" screen
     private fun startNewActivity(resultCode: Int) {
 
         // checking if login is successful
@@ -36,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
             //setting which screen to show next after login and
             //running class with set up settings
-            startActivity(Intent(this, AfterLoginActivity::class.java))
+            startActivity(Intent(this, DashboardActivity::class.java))
 
             //closing login process
             finish()

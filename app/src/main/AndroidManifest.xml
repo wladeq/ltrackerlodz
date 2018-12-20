@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.AfterLoginActivity"
+            android:name=".activities.DashboardActivity"
             android:screenOrientation="portrait" />
 
         <activity

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:background="@drawable/warning"
-    tools:context="com.wladeq.ltracker.activities.AfterLoginActivity">
+    tools:context="com.wladeq.ltracker.activities.DashboardActivity">
 
     <Button
         android:id="@+id/button5"
