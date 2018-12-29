@@ -9,6 +9,7 @@
     tools:ignore="Overdraw">
 
     <Button
+        android:id="@+id/btnContact"
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:layout_marginBottom="25dp"

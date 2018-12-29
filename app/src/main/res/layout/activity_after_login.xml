@@ -9,14 +9,12 @@
     tools:context="com.wladeq.ltracker.activities.DashboardActivity">
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnLogout"
         style="@style/NoBorderButton"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:onClick="logout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,20 +23,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="@+id/button5"
-        app:layout_constraintEnd_toEndOf="@+id/button5"
-        app:layout_constraintStart_toStartOf="@+id/button5"
-        app:layout_constraintTop_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLogout"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogout"
+        app:layout_constraintStart_toStartOf="@+id/btnLogout"
+        app:layout_constraintTop_toTopOf="@+id/btnLogout"
         app:srcCompat="@drawable/sign_out" />
 
     <Button
-        android:id="@+id/btnSingIn"
+        android:id="@+id/btnStartRace"
         android:layout_width="300dp"
-        android:layout_height="47dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/login_grey"
         android:fontFamily="@font/bkant_bold"
-        android:onClick="letsStart"
         android:text="@string/start_race"
         android:textColor="@color/tw__composer_black"
         android:textSize="23sp"
@@ -48,36 +45,18 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/btnList"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/login_grey"
         android:fontFamily="@font/bkant_bold"
-        android:textSize="23sp"
         android:text="@string/list_of_rides"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
-        app:layout_constraintHorizontal_bias="0.495"
-        android:onClick="listOfRidea"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/login_grey"
-        android:fontFamily="@font/bkant_bold"
-        android:onClick="instructorChoiceDialog"
-        android:text="@string/choose_an_instructor"
-        android:textColor="@color/tw__composer_black"
         android:textSize="23sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSingIn"
+        app:layout_constraintBottom_toTopOf="@+id/btnStartRace"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"

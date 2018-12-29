@@ -4,12 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.widget.Toast
-
 import com.firebase.ui.auth.AuthUI
 import com.wladeq.ltracker.R
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.login_page.*
 
 // this class describes login screen
 // allows to proceed to "contuct us" screen or to "login" screen
@@ -51,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
     // starting authentication process after click on button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.login_page)
 
         //describing what button should do
         btnSingIn.setOnClickListener {
@@ -61,31 +59,10 @@ class LoginActivity : AppCompatActivity() {
                     AuthUI.getInstance().createSignInIntentBuilder()
                             .setAllowNewEmailAccounts(false).build(), LOGIN_PERMISSION)
 
-//             AuthUI.getInstance()
-//                    .createSignInIntentBuilder()
-//                    .setLogo(R.mipmap.ic_launcher_round)
-//                    .setIsSmartLockEnabled(false)
-//                    .setProviders(
-//                            arrayListOf(AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-//                    .setTheme(R.style.AppTheme)
-//                    .setAllowNewEmailAccounts(false)
-//                    .setLogo(R.drawable.com_facebook_button_login_logo)
-//                    .build(),
-//                    LOGIN_PERMISSION)
         }
-    }
-
-    // button which gives us ability to proceed to "contact us" screen
-    fun contact(view: View) {
-        startActivity(Intent(this, ContactUsActivity::class.java))
-    }
-
-    //Back button minimize application
-    override fun onBackPressed() {
-        val startMain = Intent(Intent.ACTION_MAIN)
-        startMain.addCategory(Intent.CATEGORY_HOME)
-        startMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(startMain)
+        btnContact.setOnClickListener {
+            startActivity(Intent(this, ContactUsActivity::class.java))
+        }
     }
 
     companion object {

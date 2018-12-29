@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
-import android.view.View
 import android.widget.Toast
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -28,7 +27,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.wladeq.ltracker.InstructorChoose
 import com.wladeq.ltracker.R
 import com.wladeq.ltracker.dialogues.FinishRaceDialog
+import kotlinx.android.synthetic.main.activity_maps.*
 import java.sql.Timestamp
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 // This class shows map and records position of a student
@@ -39,18 +41,23 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
 
     private var mMap: GoogleMap? = null
     private var mGoogleApiClient: GoogleApiClient? = null
-    private var i = 1
+    private var i = 0
     private var startMarker: Boolean = true
     private var lastLoc: LatLng? = null
 
-    //generate UID to name current track record
+    //generate UID to name current track recordFirebaseDatabase
     private val trackUid = UUID.randomUUID().toString()
+    private var user = FirebaseAuth.getInstance().currentUser
+    private var studentUid = user?.uid
+    private var startDate = ""
 
-    //Some test change
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-
+        finish.setOnClickListener {
+            FinishRaceDialog().show(supportFragmentManager, "Finish race")
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         checkLocationPermission()
         //Find where we should show the map
@@ -58,20 +65,21 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
         mapFragment.getMapAsync(this)
 
         // Getting uid of current student
-        val user = FirebaseAuth.getInstance().currentUser
-        val studentUid = user?.uid
 
+        val dateFormat = SimpleDateFormat("yyyy|MM|dd HH:mm:ss")
+        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val date = Date()
+        startDate = dateFormat.format(date).toString()
         //If current client is new - store his data in Firebase
-
-        FirebaseDatabase.getInstance().getReference("users/$studentUid/email").setValue(user?.email)
-        FirebaseDatabase.getInstance().getReference("users/$studentUid/role").setValue(0)
-        FirebaseDatabase.getInstance().getReference("users/$studentUid/uid").setValue(studentUid)
+        val database = FirebaseDatabase.getInstance()
+        database.getReference("users/$studentUid/email").setValue(user?.email)
+        database.getReference("users/$studentUid/role").setValue(0)
+        database.getReference("users/$studentUid/uid").setValue(studentUid)
         //Write instructor to FireBase
-        FirebaseDatabase.getInstance().getReference("tracks/$trackUid/instructorUid").setValue(InstructorChoose().getChoice())
+        database.getReference("users/$studentUid/tracks/$trackUid/instructorUid").setValue(InstructorChoose().getChoice())
         //Write student to Firebase
-        FirebaseDatabase.getInstance().getReference("tracks/$trackUid/studentUid").setValue(studentUid)
-        //Write timestamp to Firebase
-        FirebaseDatabase.getInstance().getReference("tracks/$trackUid/timestamp").setValue(Timestamp(System.currentTimeMillis()).time)
+        //database.getReference("users/$studentUid/tracks/$trackUid/studentUid").setValue(studentUid)
+        database.getReference("users/$studentUid/tracks/$trackUid/timestamp").setValue(startDate)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -85,6 +93,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
             buildGoogleApiClient()
             mMap?.isMyLocationEnabled = true
         }
+
     }
 
     @Synchronized
@@ -111,7 +120,9 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
 
     override fun onConnectionSuspended(i: Int) {}
 
-    override fun onConnectionFailed(connectionResult: ConnectionResult) {}
+    override fun onConnectionFailed(connectionResult: ConnectionResult) {
+        Toast.makeText(this, "Connection failed", Toast.LENGTH_SHORT).show()
+    }
 
     override fun onLocationChanged(location: Location) {
 
@@ -128,28 +139,30 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
             startMarker = false
         }
 
-        // if there's no previous location, we place start marker and setting current marker as previous
-        lastLoc = if (lastLoc != null) {
-            val pLineOptions = PolylineOptions()
-                    .clickable(true)
-                    .add(lastLoc)
-                    .add(latLng)
-                    .color(Color.GREEN)
-            mMap?.addPolyline(pLineOptions)
-            latLng
-        } else {
-            latLng
+        if (lastLoc != latLng) {
+            //move map camera
+            mMap?.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+            mMap?.animateCamera(CameraUpdateFactory.zoomTo(15f))
+
+            //Save dots to firebase
+            val database = FirebaseDatabase.getInstance()
+            val myRef1 = database.getReference("users/$studentUid/tracks/$trackUid/points/${i++}")
+            myRef1.setValue(latLng)
+
+            // if there's no previous location, we place start marker and set current marker as previous
+            lastLoc = if (lastLoc != null) {
+                val pLineOptions = PolylineOptions()
+                        .clickable(true)
+                        .add(lastLoc)
+                        .add(latLng)
+                        .color(Color.GREEN)
+                mMap?.addPolyline(pLineOptions)
+                latLng
+            } else {
+                latLng
+            }
         }
-        startMarker = false
 
-        //move map camera
-        mMap?.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-        mMap?.animateCamera(CameraUpdateFactory.zoomTo(15f))
-
-        //Save dots to firebase
-        val database = FirebaseDatabase.getInstance()
-        val myRef1 = database.getReference("tracks/" + trackUid + "/points/" + i++)
-        myRef1.setValue(latLng)
 
     }
 
@@ -198,11 +211,6 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
     //Disable 'back' button
     override fun onBackPressed() {
         Toast.makeText(this, "Press 'FINISH RACE' to stop recording", Toast.LENGTH_LONG).show()
-    }
-
-    //Finish Record
-    fun finishRec(v: View) {
-        FinishRaceDialog().show(supportFragmentManager, "Finish race")
     }
 
     companion object {
