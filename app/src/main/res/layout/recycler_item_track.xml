@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/track_item"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/TrackRecyclerFirstLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/trackImage"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/TrackRecyclerFirstLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/trackImage" />
+
+        <ImageView
+            android:id="@+id/trackImage"
+            android:layout_width="54dp"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            tools:src="@drawable/ic_location" />
+    </RelativeLayout>
+</layout>

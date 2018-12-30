@@ -1,7 +1,7 @@
 package com.wladeq.ltracker
 
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 // class, which takes the choice of user and returns it  later
 class InstructorChoose : AppCompatActivity() {

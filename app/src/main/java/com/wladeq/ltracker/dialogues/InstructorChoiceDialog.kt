@@ -4,12 +4,12 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import com.wladeq.ltracker.InstructorChoose
 import com.wladeq.ltracker.R
-import com.wladeq.ltracker.activities.MapsActivity
+import com.wladeq.ltracker.activities.TrackRecordMapsActivity
 
-class InstructorChoiceDialog : DialogFragment() {
+class InstructorChoiceDialog : androidx.fragment.app.DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
 
@@ -36,6 +36,6 @@ class InstructorChoiceDialog : DialogFragment() {
         return builder.create()
     }
 
-    private fun start() = startActivity(Intent(context, MapsActivity::class.java))
+    private fun start() = startActivity(Intent(context, TrackRecordMapsActivity::class.java))
 
 }

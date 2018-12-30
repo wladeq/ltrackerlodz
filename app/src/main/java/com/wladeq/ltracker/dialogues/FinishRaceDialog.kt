@@ -3,12 +3,12 @@ package com.wladeq.ltracker.dialogues
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import com.wladeq.ltracker.R
 
 //this class describes popup, which comes after pressing "finish" button
 
-class FinishRaceDialog : DialogFragment() {
+class FinishRaceDialog : androidx.fragment.app.DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -19,6 +19,7 @@ class FinishRaceDialog : DialogFragment() {
         builder.setMessage("Do you want to finish race?")
                 .setPositiveButton("Finish") { _, _ ->
                     //closing current class if user wants to stop recording
+
                     System.exit(0)
                 }
                 //closing popup if user presses "cancel"

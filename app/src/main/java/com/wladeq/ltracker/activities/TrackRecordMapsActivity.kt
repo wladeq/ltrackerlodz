@@ -5,10 +5,9 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.FragmentActivity
-import android.support.v4.content.ContextCompat
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationListener
@@ -28,8 +27,6 @@ import com.wladeq.ltracker.InstructorChoose
 import com.wladeq.ltracker.R
 import com.wladeq.ltracker.dialogues.FinishRaceDialog
 import kotlinx.android.synthetic.main.activity_maps.*
-import java.sql.Timestamp
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,7 +34,7 @@ import java.util.*
 //Position points are recorded to the database
 //button "Finish" stops the recording
 
-class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+class TrackRecordMapsActivity : androidx.fragment.app.FragmentActivity(), OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private var mMap: GoogleMap? = null
     private var mGoogleApiClient: GoogleApiClient? = null
@@ -50,7 +47,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
     private var user = FirebaseAuth.getInstance().currentUser
     private var studentUid = user?.uid
     private var startDate = ""
-
+    val mLocationRequest = LocationRequest()
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -108,7 +105,6 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
 
     override fun onConnected(bundle: Bundle?) {
         // defining time period, after which application will check the location
-        val mLocationRequest = LocationRequest()
         mLocationRequest.interval = 1000
         mLocationRequest.fastestInterval = 1000
         mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -206,6 +202,10 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiClient.Con
                 }
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
     }
 
     //Disable 'back' button
