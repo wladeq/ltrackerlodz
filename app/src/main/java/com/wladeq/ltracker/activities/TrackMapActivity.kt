@@ -47,8 +47,8 @@ class TrackMapActivity : androidx.fragment.app.FragmentActivity(), OnMapReadyCal
         mMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
         val options = PolylineOptions()
 
-        options.color(Color.parseColor("#FF4081"))
-        options.width(20f)
+        options.color(Color.parseColor("#ff0000"))
+        options.width(5f)
         options.visible(true)
 
         mMap?.addPolyline(getOptions())
@@ -60,6 +60,7 @@ class TrackMapActivity : androidx.fragment.app.FragmentActivity(), OnMapReadyCal
         val options = PolylineOptions()
         selectedTrack?.coordinatesList?.forEach {
             options.add(LatLng(it.latititude!!.toDouble(), it.longtitude!!.toDouble()))
+
         }
         return options
     }

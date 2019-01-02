@@ -35,6 +35,9 @@ class ListOfRidesActivity : AppCompatActivity() {
         tracksRecycler.layoutManager = LinearLayoutManager(this)
         tracksRecycler.layoutManager = GridLayoutManager(this, 1)
         tracksRecycler.adapter = TracksAdapter(firebaseData, this, Intent(this, TrackMapActivity::class.java))
+        listOfRidesToolbar.setNavigationOnClickListener {
+            this.onBackPressed()
+        }
     }
 
 }

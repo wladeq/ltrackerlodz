@@ -1,10 +1,13 @@
 package com.wladeq.ltracker.activities
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.wladeq.ltracker.MakeTextBold
 import com.wladeq.ltracker.R
 import com.wladeq.ltracker.dialogues.InstructorChoiceDialog
 import com.wladeq.ltracker.dto.Coordinates
@@ -17,7 +20,7 @@ import java.util.*
 class DashboardActivity : AppCompatActivity() {
     val user = FirebaseAuth.getInstance().currentUser
     private var mDatabase: FirebaseDatabase? = null
-    var i = 0
+    var currentDialog: Dialog? = null
     lateinit var databaseReference: DatabaseReference
     lateinit var childEventListener: ChildEventListener
     // this class describes the screen which shows up after login
@@ -86,18 +89,31 @@ class DashboardActivity : AppCompatActivity() {
         btnList.setOnClickListener {
             startActivity(Intent(this, ListOfRidesActivity::class.java))
         }
-        btnLogout.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+        dashboardToolbar.setNavigationOnClickListener {
+            popAlert()
         }
     }
 
     //This function turn off system "back" button
     override fun onBackPressed() {
-        super.onBackPressed()
-        databaseReference.removeEventListener(childEventListener)
-        val startMain = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME)
-        startMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(startMain)
+        popAlert()
     }
 
+    private fun popAlert() {
+        this.apply {
+            currentDialog?.dismiss()
+
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Do you want to logout?")
+
+            builder.setNegativeButton("No") { a, b ->
+
+            }
+            builder.setPositiveButton("Yes") { a, b ->
+                databaseReference.removeEventListener(childEventListener)
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+            currentDialog = builder.show()
+        }
+    }
 }

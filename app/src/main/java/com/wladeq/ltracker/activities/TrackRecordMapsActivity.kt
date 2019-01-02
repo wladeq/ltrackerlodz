@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -52,6 +53,7 @@ class TrackRecordMapsActivity : androidx.fragment.app.FragmentActivity(), OnMapR
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         finish.setOnClickListener {
             FinishRaceDialog().show(supportFragmentManager, "Finish race")
         }
@@ -63,7 +65,7 @@ class TrackRecordMapsActivity : androidx.fragment.app.FragmentActivity(), OnMapR
 
         // Getting uid of current student
 
-        val dateFormat = SimpleDateFormat("yyyy|MM|dd HH:mm:ss")
+        val dateFormat = SimpleDateFormat("yyyy.MM.dd HH:mm:ss")
         dateFormat.timeZone = TimeZone.getTimeZone("UTC")
         val date = Date()
         startDate = dateFormat.format(date).toString()

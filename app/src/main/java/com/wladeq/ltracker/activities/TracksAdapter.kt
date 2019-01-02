@@ -33,9 +33,16 @@ class TracksAdapter(val items: MutableList<Tracks>, val context: Context, val in
 
     // Binds each animal in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.trackDate.text = "Date of ride" + items.get(position).dateOfRide
+        holder.trackDate.text = "Date: " + items.get(position).dateOfRide
         holder.trackImage.setImageDrawable(context.getDrawable(R.drawable.ic_location))
-        holder.instructorId.text = "Instructor " + items.get(position).instructorID
+        holder.instructorId.text =  "Instructor: " +
+                when( items.get(position).instructorID){
+                    "ucBNQA1WR3SM5fUgNdniVumm67r2" -> "Adam Kowalski"
+                    "3AFbHnKxUkV5xuFlmBWZ57C0RcS2" -> "Wojtek Nowak"
+                    else -> "Kuba Smolarek"
+                }
+
+        items.get(position).instructorID
         holder.trackElement.setOnClickListener {
             selectedTrack = items.get(position)
             startActivity(context, intent, Bundle())

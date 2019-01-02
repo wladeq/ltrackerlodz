@@ -54,11 +54,9 @@ class LoginActivity : AppCompatActivity() {
         //describing what button should do
         btnSingIn.setOnClickListener {
             startActivityForResult(
-
                     //authentication is realised with the help of google services
                     AuthUI.getInstance().createSignInIntentBuilder()
-                            .setAllowNewEmailAccounts(false).build(), LOGIN_PERMISSION)
-
+                            .setAllowNewEmailAccounts(true).build(), LOGIN_PERMISSION)
         }
         btnContact.setOnClickListener {
             startActivity(Intent(this, ContactUsActivity::class.java))
