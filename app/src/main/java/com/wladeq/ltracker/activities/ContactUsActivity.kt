@@ -23,8 +23,8 @@ class ContactUsActivity : AppCompatActivity() {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(
                     "http://maps.google.com/maps?daddr=" + 51.737557 + "," + 19.466653)))
         }
-        backBtn.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+        contactToolbar.setNavigationOnClickListener {
+            onBackPressed()
         }
         email.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO, Uri.fromParts(

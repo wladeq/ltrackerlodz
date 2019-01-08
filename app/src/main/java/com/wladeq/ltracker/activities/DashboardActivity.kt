@@ -7,7 +7,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.wladeq.ltracker.MakeTextBold
 import com.wladeq.ltracker.R
 import com.wladeq.ltracker.dialogues.InstructorChoiceDialog
 import com.wladeq.ltracker.dto.Coordinates
@@ -102,12 +101,9 @@ class DashboardActivity : AppCompatActivity() {
     private fun popAlert() {
         this.apply {
             currentDialog?.dismiss()
-
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("Do you want to logout?")
-
+            builder.setMessage("Do you want to logout?")
             builder.setNegativeButton("No") { a, b ->
-
             }
             builder.setPositiveButton("Yes") { a, b ->
                 databaseReference.removeEventListener(childEventListener)

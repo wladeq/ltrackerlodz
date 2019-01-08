@@ -3,8 +3,8 @@ package com.wladeq.ltracker.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import com.wladeq.ltracker.R
 import kotlinx.android.synthetic.main.login_page.*

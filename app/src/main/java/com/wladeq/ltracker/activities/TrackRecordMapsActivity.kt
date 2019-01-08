@@ -57,6 +57,7 @@ class TrackRecordMapsActivity : androidx.fragment.app.FragmentActivity(), OnMapR
         finish.setOnClickListener {
             FinishRaceDialog().show(supportFragmentManager, "Finish race")
         }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         checkLocationPermission()
         //Find where we should show the map
@@ -83,6 +84,7 @@ class TrackRecordMapsActivity : androidx.fragment.app.FragmentActivity(), OnMapR
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap?.uiSettings?.isZoomControlsEnabled = true
         //type of the map
         mMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
         //Location settings
