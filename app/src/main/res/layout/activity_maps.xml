@@ -11,14 +11,13 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:context="com.wladeq.ltracker.activities.TrackRecordMapsActivity"></fragment>
+        tools:context="com.wladeq.ltracker.activities.TrackRecordActivity"></fragment>
 
     <Button
         android:id="@+id/finish"
         android:layout_width="130dp"
         android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:text="@string/finish_race" />
 </RelativeLayout>

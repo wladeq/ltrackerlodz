@@ -35,7 +35,7 @@ import java.util.*
 //Position points are recorded to the database
 //button "Finish" stops the recording
 
-class TrackRecordMapsActivity : androidx.fragment.app.FragmentActivity(), OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+class TrackRecordActivity : androidx.fragment.app.FragmentActivity(), OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private var mMap: GoogleMap? = null
     private var mGoogleApiClient: GoogleApiClient? = null
@@ -125,11 +125,7 @@ class TrackRecordMapsActivity : androidx.fragment.app.FragmentActivity(), OnMapR
     }
 
     override fun onLocationChanged(location: Location) {
-
-        //Place current location marker
         val latLng = LatLng(location.latitude, location.longitude)
-
-        //Place start marker
         if (startMarker) {
             val markerOptions = MarkerOptions()
                     .position(latLng)
@@ -138,7 +134,6 @@ class TrackRecordMapsActivity : androidx.fragment.app.FragmentActivity(), OnMapR
             mMap?.addMarker(markerOptions)
             startMarker = false
         }
-
         if (lastLoc != latLng) {
             //move map camera
             mMap?.moveCamera(CameraUpdateFactory.newLatLng(latLng))
@@ -162,8 +157,6 @@ class TrackRecordMapsActivity : androidx.fragment.app.FragmentActivity(), OnMapR
                 latLng
             }
         }
-
-
     }
 
     private fun checkLocationPermission() {
@@ -206,10 +199,6 @@ class TrackRecordMapsActivity : androidx.fragment.app.FragmentActivity(), OnMapR
                 }
             }
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
     }
 
     //Disable 'back' button

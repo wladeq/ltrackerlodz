@@ -36,7 +36,7 @@
             android:name=".activities.TrackMapActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.TrackRecordMapsActivity"
+            android:name=".activities.TrackRecordActivity"
             android:label="@string/title_activity_maps">
 
         </activity>
